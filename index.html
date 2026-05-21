@@ -3,790 +3,598 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leslie Hunt—Content Designer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <title>Leslie Hunt—Content Designer & Strategist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --cream: #F5F0E8;
-      --ink: #1A1A18;
-      --forest: #1D4D2E;
-      --carrot: #E8651A;
-      --gold: #D4A847;
-      --warm-white: #FDFAF4;
-      --muted: #6B6558;
-      --border: #D9D2C5;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    :root {
+      --ink: #1a1a1a;
+      --mid: #5a5a5a;
+      --soft: #8a8a8a;
+      --rule: #e2e2e2;
+      --bg: #fafaf8;
+      --accent: #c8492a;
+      --accent-light: #f5ede9;
+      --white: #ffffff;
+      --card-bg: #ffffff;
+      --serif: 'Lora', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--cream);
+      font-family: var(--sans);
+      background: var(--bg);
       color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 3rem;
-      background: rgba(245, 240, 232, 0.88);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+    /* ── Password Gate ── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
     }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.85rem;
+    #gate h2 {
+      font-family: var(--serif);
+      color: var(--white);
+      font-size: 1.4rem;
       font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    #gate p {
+      color: var(--soft);
+      font-size: 0.875rem;
+      text-align: center;
+      max-width: 280px;
+    }
+    .gate-form {
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    #gate input[type="password"] {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      padding: 0.65rem 1rem;
+      border: 1px solid #444;
+      background: #2a2a2a;
+      color: var(--white);
+      border-radius: 4px;
+      outline: none;
+      width: 200px;
+    }
+    #gate input[type="password"]:focus {
+      border-color: var(--accent);
+    }
+    #gate button {
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+    #gate button:hover { background: #b03d22; }
+    #gate-error {
+      color: #e07060;
+      font-size: 0.8rem;
+      min-height: 1.2em;
+      text-align: center;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,250,248,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.02em;
       transition: color 0.2s;
     }
+    .nav-links a:hover { color: var(--ink); }
 
-    .nav-links a:hover { color: var(--carrot); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 5rem;
+    /* ── Hero ── */
+    #hero {
+      padding: 6rem 2rem 5rem;
+      max-width: 860px;
+      margin: 0 auto;
     }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 6rem 4rem 6rem 5rem;
-      position: relative;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--carrot);
+      color: var(--accent);
       margin-bottom: 1.5rem;
     }
-
-    .hero-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 5vw, 5.5rem);
-      font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.02em;
+    #hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.15;
       color: var(--ink);
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
-
-    .hero-headline em {
-      font-style: italic;
-      color: var(--forest);
-    }
-
+    #hero h1 em { font-style: italic; color: var(--accent); }
     .hero-sub {
       font-size: 1.1rem;
+      color: var(--mid);
+      max-width: 560px;
       line-height: 1.7;
-      color: var(--muted);
-      max-width: 420px;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    .hero-sub strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
+    /* ── Buttons ── */
     .btn {
       display: inline-block;
-      padding: 0.85rem 2rem;
-      border-radius: 2px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
       text-decoration: none;
+      letter-spacing: 0.02em;
       transition: all 0.2s;
       cursor: pointer;
     }
+    .btn-primary { background: var(--ink); color: var(--white); }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-ghost { border: 1.5px solid var(--rule); color: var(--mid); }
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 
-    .btn-primary {
-      background: var(--forest);
-      color: var(--warm-white);
-      border: 2px solid var(--forest);
+    /* ── Stats ── */
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      padding: 2rem 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      margin-top: 3rem;
     }
-
-    .btn-primary:hover {
-      background: var(--carrot);
-      border-color: var(--carrot);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--ink);
-      border: 2px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--ink);
-    }
-
-    .hero-right {
-      position: relative;
-      background: var(--forest);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-right-inner {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 3rem;
-      position: relative;
-    }
-
-    .hero-stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .hero-stat {
-      background: rgba(255,255,255,0.06);
-      padding: 2rem 1.5rem;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--gold);
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent);
       line-height: 1;
-      margin-bottom: 0.4rem;
     }
-
-    .hero-stat-label {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--soft);
+      margin-top: 0.25rem;
+      max-width: 160px;
       line-height: 1.4;
     }
 
-    .hero-tagline {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.5);
-      margin-top: 2.5rem;
-      text-align: center;
-      max-width: 320px;
-      line-height: 1.6;
-    }
-
-    /* ── MARQUEE ── */
-    .marquee-strip {
-      background: var(--carrot);
-      padding: 0.9rem 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .marquee-inner {
-      display: inline-block;
-      animation: marquee 22s linear infinite;
-    }
-
-    .marquee-inner span {
-      font-size: 0.78rem;
-      font-weight: 500;
+    /* ── Sections ── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--warm-white);
-      margin-right: 3rem;
-    }
-
-    .marquee-inner span::before {
-      content: '✦';
-      margin-right: 3rem;
-      opacity: 0.6;
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 7rem 5rem;
-    }
-
-    .section-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--carrot);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 1.5rem;
-    }
-
-    .section-title em {
-      font-style: italic;
-      color: var(--forest);
-    }
-
-    /* ── ABOUT ── */
-    .about {
-      background: var(--warm-white);
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 6rem;
-      align-items: center;
-    }
-
-    .about-body {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: var(--muted);
-    }
-
-    .about-body p + p { margin-top: 1.2rem; }
-
-    .about-body strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-
-    .skill-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.2rem;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      background: var(--cream);
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .skill-item:hover {
-      border-color: var(--forest);
-      transform: translateX(4px);
-    }
-
-    .skill-icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
-    }
-
-    .skill-name {
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: var(--ink);
-      margin-bottom: 0.3rem;
-    }
-
-    .skill-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ── WORK ── */
-    .work {
-      background: var(--cream);
-    }
-
-    .work-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 4rem;
-    }
-
-    .projects {
-      display: flex;
-      flex-direction: column;
-      gap: 6rem;
-    }
-
-    .project-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .project-card.reverse {
-      direction: rtl;
-    }
-
-    .project-card.reverse > * {
-      direction: ltr;
-    }
-
-    .project-visual {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--warm-white);
-    }
-
-    .project-visual img,
-    .project-visual video {
-      width: 100%;
-      height: 420px;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-      transition: transform 0.5s ease;
-      background: var(--warm-white);
-    }
-
-    .project-visual:hover img,
-    .project-visual:hover video {
-      transform: scale(1.03);
-    }
-
-    .project-tag {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: var(--forest);
-      color: var(--warm-white);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.75rem;
-    }
-
-    .project-info { padding: 1rem 0; }
-
-    .project-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      font-weight: 900;
-      line-height: 1;
-      color: var(--border);
-      margin-bottom: -0.5rem;
-    }
-
-    .project-company {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--carrot);
+      color: var(--accent);
       margin-bottom: 0.75rem;
     }
-
-    .project-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
+    section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
       color: var(--ink);
-      margin-bottom: 1.2rem;
+      margin-bottom: 2.5rem;
     }
+    section h2 em { font-style: italic; color: var(--accent); }
 
-    .project-desc {
-      font-size: 0.97rem;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 1.8rem;
+    /* ── About ── */
+    #about { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--mid); line-height: 1.8; margin-bottom: 1rem; font-size: 0.975rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-name-note {
+      font-size: 0.78rem;
+      color: var(--soft);
+      margin-top: 1.5rem;
+      font-style: italic;
+      border-top: 1px solid var(--rule);
+      padding-top: 1rem;
     }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 1.25rem;
     }
+    .skill-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .skill-title { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; }
+    .skill-desc { font-size: 0.8rem; color: var(--soft); line-height: 1.5; }
 
+    /* ── Work ── */
+    #work { background: var(--bg); }
+    .projects-list { display: flex; flex-direction: column; gap: 4rem; }
+    .project-card {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .project-header {
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .project-num {
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      color: var(--soft);
+    }
+    .project-type {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+    }
+    .project-company {
+      font-size: 0.8rem;
+      color: var(--soft);
+      margin-left: auto;
+    }
+    .project-header h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .project-image {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      object-position: top;
+      background: #f5f5f3;
+      display: block;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-body { padding: 1.75rem 2rem 2rem; }
+    .project-body p { color: var(--mid); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; }
+    .project-body p:last-of-type { margin-bottom: 1.25rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
     .tag {
       font-size: 0.72rem;
       font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+    }
+
+    /* ── Advocacy ── */
+    #advocacy {
+      background: #1a1a1a;
+      color: var(--white);
+    }
+    #advocacy .section-label { color: #c8492a; }
+    #advocacy h2 { color: var(--white); }
+    #advocacy h2 em { color: #c8492a; }
+    .advocacy-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+    .advocacy-text p {
+      color: #b0b0b0;
+      line-height: 1.8;
+      font-size: 0.975rem;
+      margin-bottom: 1rem;
+    }
+    .advocacy-text p:last-child { margin-bottom: 0; }
+    .advocacy-text a { color: #e07060; text-decoration: none; border-bottom: 1px solid rgba(224,112,96,0.3); }
+    .advocacy-text a:hover { border-bottom-color: #e07060; }
+    .opeds { display: flex; flex-direction: column; gap: 1rem; }
+    .opeds-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+    .oped-card {
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .oped-card:hover { border-color: #555; }
+    .oped-pub {
+      font-size: 0.72rem;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    /* ── EXPERIENCE ── */
-    .experience {
-      background: var(--forest);
-      color: var(--warm-white);
-    }
-
-    .experience .section-title {
-      color: var(--warm-white);
-    }
-
-    .experience .section-title em {
-      color: var(--gold);
-    }
-
-    .exp-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 4rem;
-    }
-
-    .exp-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 2.5rem 2rem;
-      transition: background 0.2s;
-    }
-
-    .exp-card:hover {
-      background: rgba(255,255,255,0.09);
-    }
-
-    .exp-company {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
-    }
-
-    .exp-role {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--warm-white);
+      color: #666;
       margin-bottom: 0.4rem;
-      line-height: 1.2;
     }
-
-    .exp-years {
+    .oped-title {
+      font-family: var(--serif);
+      font-size: 0.975rem;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+    .oped-desc {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+    .oped-link {
       font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 1.2rem;
+      font-weight: 600;
+      color: #c8492a;
+      text-decoration: none;
+      letter-spacing: 0.02em;
     }
+    .oped-link:hover { color: #e07060; }
 
-    .exp-desc {
-      font-size: 0.88rem;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.6);
+    /* ── Experience ── */
+    #experience { background: var(--white); border-top: 1px solid var(--rule); }
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
     }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-company { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .exp-period { font-size: 0.8rem; color: var(--soft); margin-top: 0.2rem; }
+    .exp-role { font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.4rem; }
+    .exp-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; }
 
-    /* ── CONTACT ── */
-    .contact {
-      background: var(--ink);
-      text-align: center;
-      padding: 8rem 5rem;
-    }
+    /* ── Contact ── */
+    #contact { background: var(--bg); }
+    .contact-inner { max-width: 560px; }
+    #contact h2 { margin-bottom: 1rem; }
+    #contact p { color: var(--mid); line-height: 1.8; font-size: 0.975rem; margin-bottom: 2rem; }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    .contact .section-eyebrow { color: var(--gold); }
-
-    .contact .section-title {
-      color: var(--warm-white);
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .contact .section-title em { color: var(--carrot); }
-
-    .contact-sub {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 3rem;
-      line-height: 1.7;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .contact-links .btn-primary {
-      background: var(--carrot);
-      border-color: var(--carrot);
-    }
-
-    .contact-links .btn-primary:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-    }
-
-    .contact-links .btn-secondary {
-      border-color: rgba(255,255,255,0.2);
-      color: var(--warm-white);
-    }
-
-    .contact-links .btn-secondary:hover {
-      border-color: var(--warm-white);
-    }
-
-    /* ── FOOTER ── */
+    /* ── Footer ── */
     footer {
       background: var(--ink);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 2rem 5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer p {
+      color: #666;
+      text-align: center;
+      padding: 1.5rem 2rem;
       font-size: 0.8rem;
-      color: rgba(255,255,255,0.3);
     }
 
-    footer a {
-      color: rgba(255,255,255,0.3);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover { color: var(--carrot); }
-
-    /* ── ANIMATIONS ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 7rem 1.5rem 3rem; }
-      .hero-right { min-height: 360px; }
-
-      section { padding: 4rem 1.5rem; }
-
-      .about { grid-template-columns: 1fr; gap: 3rem; }
-
-      .project-card,
-      .project-card.reverse { grid-template-columns: 1fr; direction: ltr; }
-
-      .exp-grid { grid-template-columns: 1fr; }
-
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      .about-grid, .advocacy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 3.5rem 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">Leslie Hunt</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<!-- ── PASSWORD GATE ── -->
+<div id="gate">
+  <h2>Leslie Hunt — Portfolio</h2>
+  <p>This portfolio is password protected. Please enter the password to continue.</p>
+  <div class="gate-form">
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off" />
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+  <div id="gate-error"></div>
+</div>
 
-  <!-- HERO -->
-  <section class="hero" style="padding:0;">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Content Designer · Orange County, CA</p>
-      <h1 class="hero-headline">Words that<br/><em>actually</em><br/>do the work.</h1>
-      <p class="hero-sub">
-        Hi, I'm Leslie. I craft <strong>content strategies, voice & tone frameworks,</strong> and <strong>product copy</strong> that earns its place in the interface—and occasionally makes people smile.
-      </p>
-      <div class="hero-ctas">
-        <a href="#work" class="btn btn-primary">See the work</a>
-        <a href="#contact" class="btn btn-secondary">Get in touch</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-right-inner">
-        <div class="hero-stat-grid">
-          <div class="hero-stat">
-            <div class="hero-stat-num">5+</div>
-            <div class="hero-stat-label">Years at Instacart shaping product language</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">15+</div>
-            <div class="hero-stat-label">Years writing across journalism, finance & tech</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">3</div>
-            <div class="hero-stat-label">Companies where legal said "we need to talk"</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">∞</div>
-            <div class="hero-stat-label">UI labels made less painful</div>
-          </div>
-        </div>
-        <p class="hero-tagline">"The best product copy is the kind you don't notice—until it's gone."</p>
-      </div>
-    </div>
-  </section>
+<script>
+  // Check if already authenticated this session
+  if (sessionStorage.getItem('lh-auth') === 'true') {
+    document.getElementById('gate').style.display = 'none';
+  }
 
-  <!-- MARQUEE -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-inner">
-      <span>Content Strategy</span>
-      <span>Voice & Tone</span>
-      <span>UX Writing</span>
-      <span>Product Copy</span>
-      <span>Information Architecture</span>
-      <span>Content Systems</span>
-      <span>Storytelling</span>
-      <span>User Research</span>
-      <span>Content Strategy</span>
-      <span>Voice & Tone</span>
-      <span>UX Writing</span>
-      <span>Product Copy</span>
-      <span>Information Architecture</span>
-      <span>Content Systems</span>
-      <span>Storytelling</span>
-      <span>User Research</span>
+  document.getElementById('gate-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  function checkPassword() {
+    const val = document.getElementById('gate-input').value;
+    const err = document.getElementById('gate-error');
+    if (val === 'Leslie1922') {
+      sessionStorage.setItem('lh-auth', 'true');
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      err.textContent = 'Incorrect password. Please try again.';
+      document.getElementById('gate-input').value = '';
+      document.getElementById('gate-input').focus();
+    }
+  }
+</script>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#">Leslie Hunt</a>
+  <ul class="nav-links">
+    <li><a href="#about">About me</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#advocacy">Advocacy</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-label">Content Designer · Strategist · Writer</div>
+  <h1>Words that <em>actually</em> work.</h1>
+  <p class="hero-sub">I craft content strategies, voice & tone frameworks, and product copy that earns its place in the interface—and occasionally makes people smile.</p>
+  <div class="hero-actions">
+    <a href="#work" class="btn btn-primary">See the work</a>
+    <a href="#contact" class="btn btn-ghost">Get in touch</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Years at Instacart shaping product language</div>
+    </div>
+    <div>
+      <div class="stat-num">21+</div>
+      <div class="stat-label">Years writing across journalism, finance & tech</div>
+    </div>
+    <div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Companies where legal said "we need to talk"</div>
+    </div>
+    <div>
+      <div class="stat-num">∞</div>
+      <div class="stat-label">UI labels made less painful</div>
     </div>
   </div>
+</section>
 
-  <!-- ABOUT -->
-  <section class="about fade-up" id="about">
-    <div>
-      <p class="section-eyebrow">About</p>
-      <h2 class="section-title">Content that<br/><em>connects</em>,<br/>not just informs.</h2>
-    </div>
-    <div>
-      <div class="about-body">
-        <p>
-          I'm a content designer with roots in <strong>journalism</strong> and a career that has wound through personal finance, financial services, social media, and grocery tech. From breaking down credit card fine print at Bankrate to shaping how Instagram explained ads privacy to hundreds of millions of users, I've spent 15+ years figuring out how words fit into systems—and how to make those systems feel human.
-        </p>
-        <p>
-          My work lives at the intersection of strategy and craft. That means contributing to <strong>voice and tone frameworks</strong>, building <strong>terminology systems for complex and sensitive products</strong>, defining content for <strong>0-to-1 features</strong>, and writing <strong>AI prompts and evaluation rubrics</strong> that keep automated copy on-brand and harm-aware. I also write copy that drives and aligns with marketing direction for moments that land.
-        </p>
-        <p>
-          I've led content for high-stakes launches, partnered with legal and policy teams on regulated products, and sat in enough cross-functional meetings to know that the best ideas come from the quietest person in the room. Sometimes that's me. Sometimes I'm the one asking the question nobody wanted to ask.
-        </p>
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">About me</p>
+    <h2>Content that <em>connects,</em> not just informs.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a content designer with roots in journalism and a career that has wound through personal finance, financial services, social media, and grocery tech. From breaking down credit card fine print at Bankrate to shaping how Instagram explained ads privacy to hundreds of millions of users, I've spent 21+ years figuring out how words fit into systems—and how to make those systems feel human.</p>
+        <p>My work lives at the intersection of strategy and craft: voice and tone frameworks, terminology systems for complex and sensitive products, 0-to-1 feature content, and AI prompt frameworks that keep automated copy on-brand and harm-aware. I've led content for high-stakes launches, partnered with legal and policy teams on regulated products, and sat in enough cross-functional meetings to know that the best ideas often come from the quietest person in the room.</p>
+        <p class="about-name-note">Formerly published as Leslie McFadden.</p>
       </div>
-      <div class="skills-list">
-        <div class="skill-item">
+      <div class="skills-grid">
+        <div class="skill-card">
           <div class="skill-icon">🗺️</div>
-          <div>
-            <div class="skill-name">Content Strategy</div>
-            <div class="skill-desc">End-to-end content frameworks that scale across products, teams, and user states without losing their personality.</div>
-          </div>
+          <div class="skill-title">Content Strategy</div>
+          <div class="skill-desc">End-to-end frameworks that scale across products and teams without losing personality.</div>
         </div>
-        <div class="skill-item">
+        <div class="skill-card">
           <div class="skill-icon">🎙️</div>
-          <div>
-            <div class="skill-name">Voice & Tone Definition</div>
-            <div class="skill-desc">Guidelines that give writers a north star—and enough creative latitude to make it their own.</div>
-          </div>
+          <div class="skill-title">Voice & Tone</div>
+          <div class="skill-desc">Guidelines that give writers a north star and enough creative latitude to make it their own.</div>
         </div>
-        <div class="skill-item">
+        <div class="skill-card">
           <div class="skill-icon">✍️</div>
-          <div>
-            <div class="skill-name">On-Brand Product Copy</div>
-            <div class="skill-desc">UI copy, onboarding flows, error messages, and copy that drives and aligns with marketing direction for moments that land.</div>
+          <div class="skill-title">Product Copy</div>
+          <div class="skill-desc">UI copy, onboarding flows, error messages, and marketing moments that land.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">⚖️</div>
+          <div class="skill-title">Regulated Content</div>
+          <div class="skill-desc">Sensitive and policy-adjacent products navigated with legal, privacy, and compliance partners.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORK ── -->
+<section id="work">
+  <div class="section-inner">
+    <p class="section-label">Selected Work</p>
+    <h2>Five projects. <em>One throughline:</em> words that earn their space.</h2>
+    <div class="projects-list">
+
+      <!-- Project 01: Instagram Ads Privacy -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-num">01</span>
+            <span class="project-type">Policy · UX Writing</span>
+            <span class="project-company">Instagram / Facebook</span>
+          </div>
+          <h3>Instagram Ads Privacy Control</h3>
+        </div>
+        <img class="project-image" src="instagram-privacy.png" alt="Instagram Ad Preferences screen showing topic controls including Alcohol, Parenting, Pets, and Social Issues" />
+        <div class="project-body">
+          <p>Instagram had a policy problem: new ads privacy regulations required giving users control over the topics their ads were based on. The challenge wasn't legal compliance—it was translation. Policy language is precise but rarely human. I defined the content strategy for Instagram's first-ever ads privacy control, shaping how a sensitive and legally complex policy change got communicated to hundreds of millions of users.</p>
+          <p>That meant writing UI copy that felt clear and calm without minimizing user choice, developing the naming and framing for the topic categories, and partnering with legal, privacy, and policy teams throughout to ensure every word passed scrutiny without losing plain-language accessibility. I also led content alignment across Instagram and Facebook to ensure the ads privacy narrative stayed consistent across both platforms.</p>
+          <div class="project-tags">
+            <span class="tag">Policy Translation</span>
+            <span class="tag">UX Writing</span>
+            <span class="tag">Regulated Content</span>
+            <span class="tag">Cross-functional Alignment</span>
+            <span class="tag">Content Strategy</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- WORK -->
-  <section class="work" id="work">
-    <div class="work-header fade-up">
-      <div>
-        <p class="section-eyebrow">Selected Work</p>
-        <h2 class="section-title">Three projects.<br/><em>One throughline:</em><br/>words that earn their space.</h2>
-      </div>
-    </div>
-
-    <div class="projects">
-
-      <!-- PROJECT 1 -->
-      <div class="project-card fade-up">
-        <div class="project-visual">
-          <img src="project-tonemap.png" alt="The Instacart Product Tone Map—a visual framework spanning Playful to Instructive across tone registers" />
-          <span class="project-tag">Voice & Tone</span>
+      <!-- Project 02: Task Platform -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-num">02</span>
+            <span class="project-type">0-to-1 · Naming · UX Writing</span>
+            <span class="project-company">Instacart</span>
+          </div>
+          <h3>Shopper Task Platform</h3>
         </div>
-        <div class="project-info">
-          <div class="project-number">01</div>
-          <p class="project-company">Instacart</p>
-          <h3 class="project-title">The Instacart Product Tone Map</h3>
-          <p class="project-desc">
-            When a product grows fast, the voice can get lost in the shuffle. I contributed to Instacart's product tone map—defining one of the five tone registers and helping shape the criteria across the others. The framework spans from <em>Playful</em> to <em>Instructive</em>, each with clear usage guidelines, real examples, and the all-important "don't" column.
-          </p>
-          <p class="project-desc">
-            The goal wasn't to police word choice. It was to give every writer, PM, and designer a shared vocabulary for talking about tone—so that "warmer" and "more direct" mean the same thing to everyone in the room.
-          </p>
+        <div class="project-body">
+          <p>When Instacart built a new task system for shoppers, nothing had a name yet. I came in at zero—naming every shopper-facing task, writing all in-task educational guidance, guiding the tone direction, and developing the full terminology system that would define how the platform communicated with shoppers going forward.</p>
+          <p>The work required holding two things at once: consistency (shoppers needed to recognize patterns across tasks) and humanity (these are people doing real work, not buttons to click). The terminology system I built became the foundation for how the Task Platform speaks to shoppers across every workflow.</p>
+          <div class="project-tags">
+            <span class="tag">Naming</span>
+            <span class="tag">Terminology Systems</span>
+            <span class="tag">0-to-1</span>
+            <span class="tag">Tone Direction</span>
+            <span class="tag">UX Writing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 03: Tone Map -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-num">03</span>
+            <span class="project-type">Voice & Tone</span>
+            <span class="project-company">Instacart</span>
+          </div>
+          <h3>The Instacart Product Tone Map</h3>
+        </div>
+        <img class="project-image" src="project-tonemap.png" alt="The Instacart Product Tone Map—a visual framework spanning Playful to Instructive across tone registers" />
+        <div class="project-body">
+          <p>When a product grows fast, the voice can get lost in the shuffle. I contributed to Instacart's product tone map—defining one of the five tone registers and helping shape the criteria across the others. The framework spans from Playful to Instructive, each with clear usage guidelines, real examples, and the all-important "don't" column.</p>
+          <p>The goal wasn't to police word choice. It was to give every writer, PM, and designer a shared vocabulary for talking about tone—so that "warmer" and "more direct" mean the same thing to everyone in the room.</p>
           <div class="project-tags">
             <span class="tag">Voice & Tone</span>
             <span class="tag">Content Strategy</span>
@@ -796,22 +604,20 @@
         </div>
       </div>
 
-      <!-- PROJECT 2 -->
-      <div class="project-card reverse fade-up">
-        <div class="project-visual">
-          <img src="project-home.png" alt="Instacart Home Screen—free delivery coupon banner copy variants across member, non-member, and churned user states" />
-          <span class="project-tag">Product Copy</span>
+      <!-- Project 04: Saver Stores -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-num">04</span>
+            <span class="project-type">Product Copy · Content Systems</span>
+            <span class="project-company">Instacart</span>
+          </div>
+          <h3>Instacart Saver Stores</h3>
         </div>
-        <div class="project-info">
-          <div class="project-number">02</div>
-          <p class="project-company">Instacart</p>
-          <h3 class="project-title">Instacart Saver Stores</h3>
-          <p class="project-desc">
-            One offer. Four user states. Dozens of copy variants. This project required writing banner copy that could flex across new users, churned members, non-members, and IC+ subscribers—each with a different value prop, different emotional context, and different stakes.
-          </p>
-          <p class="project-desc">
-            From <em>"$5 Flat Delivery"</em> to <em>"No Service Fee or Markups"</em>—each headline had to be bold enough to stop a thumb mid-scroll while staying true to the brand's voice. The result: a content system that gave the design team a full suite of tested, on-brand options for every scenario.
-          </p>
+        <img class="project-image" src="project-home.png" alt="Instacart Home Screen—free delivery coupon banner copy variants across member, non-member, and churned user states" />
+        <div class="project-body">
+          <p>One offer. Four user states. Dozens of copy variants. This project required writing banner copy that could flex across new users, churned members, non-members, and IC+ subscribers—each with a different value prop, different emotional context, and different stakes.</p>
+          <p>From "No Service Fee or Markups" to "Flat Delivery"—each headline had to be bold enough to stop a thumb mid-scroll while staying true to the brand's voice. The result: a content system that gave the design team a full suite of tested, on-brand options for every scenario.</p>
           <div class="project-tags">
             <span class="tag">Product Copy</span>
             <span class="tag">Content Systems</span>
@@ -821,152 +627,132 @@
         </div>
       </div>
 
-      <!-- PROJECT 3 -->
-      <div class="project-card fade-up">
-        <div class="project-visual">
-          <img src="onboarding.gif" alt="Instacart Shopper Onboarding Flow—10-step narrative onboarding with brand storytelling, animated" />
-          <span class="project-tag">Storytelling · Content Strategy</span>
+      <!-- Project 05: Shopper Celebration Reel -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-num">05</span>
+            <span class="project-type">Storytelling · Content Strategy</span>
+            <span class="project-company">Instacart</span>
+          </div>
+          <h3>Shopper Celebration Reel</h3>
         </div>
-        <div class="project-info">
-          <div class="project-number">03</div>
-          <p class="project-company">Instacart</p>
-          <h3 class="project-title">Shopper Celebration Reel</h3>
-          <p class="project-desc">
-            Instacart wanted to celebrate shoppers with a personalized in-app reel—think Spotify Wrapped, but make it grocery. I developed the storyline and the framework for how dynamic content would flow through each step, shaping a narrative arc that treated shoppers like the humans they are, not just a number in a funnel.
-          </p>
-          <p class="project-desc">
-            The standout moment: I took a real data point—shoppers pick more bananas than any other item—and made it funny. <em>"That's bananas. Literally. You've picked 17,000."</em> The reel was a hit with shoppers, and that line was a big reason why. This is what it looks like when a single good idea earns its keep.
-          </p>
+        <img class="project-image" src="onboarding.gif" alt="Instacart Shopper Celebration Reel—personalized in-app storytelling experience" />
+        <div class="project-body">
+          <p>Instacart wanted to celebrate shoppers with a personalized in-app reel—think Spotify Wrapped, but make it grocery. I developed the storyline and the framework for how dynamic content would flow through each step, shaping a narrative arc that treated shoppers like the humans they are, not just a number in a funnel.</p>
+          <p>The standout moment: I took a real data point—shoppers pick more bananas than any other item—and made it funny. "That's bananas. Literally. You've picked 17,000." The reel was a hit with shoppers, and that line was a big reason why. This is what it looks like when a single good idea earns its keep.</p>
           <div class="project-tags">
-            <span class="tag">Onboarding</span>
             <span class="tag">Storytelling</span>
             <span class="tag">UX Writing</span>
             <span class="tag">Delight Moments</span>
+            <span class="tag">Content Strategy</span>
           </div>
         </div>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- EXPERIENCE -->
-  <section class="experience fade-up" id="experience">
-    <p class="section-eyebrow" style="color: var(--gold);">Experience</p>
-    <h2 class="section-title">The resume,<br/><em>unabridged.</em></h2>
-
-    <div class="exp-grid">
-      <div class="exp-card">
-        <div class="exp-company">Instacart</div>
-        <div class="exp-role">Senior Content Designer II</div>
-        <div class="exp-years">2021–Present</div>
-        <div class="exp-desc">Led end-to-end content strategy for advertiser tools, customer shopping experience, and the Shopper app. Contributed to Instacart's product tone framework, built scalable communication frameworks and terminology systems, and developed AI prompt frameworks that embedded brand voice and harm-aware language constraints.</div>
+<!-- ── ADVOCACY ── -->
+<section id="advocacy">
+  <div class="section-inner">
+    <p class="section-label">Advocacy & Other Writing</p>
+    <h2>Words that <em>make an impact.</em></h2>
+    <div class="advocacy-grid">
+      <div class="advocacy-text">
+        <p>After my own experience with the NYPD's Special Victims Division, I chose to go public—speaking with the New York Times, NY1, the New York Post, and the New York Daily News, and testifying before the New York City Council. That advocacy helped spark a Department of Justice investigation into the NYPD's mishandling of sexual assault cases.</p>
+        <p>I volunteer with <a href="https://www.risetowin.org" target="_blank" rel="noopener">Rise</a>, a survivor-led organization that advances survivor-centered legislation. And I write <em>Fractured</em>, a newsletter examining what happens after reporting—where systems fail survivors, and how they can be reformed.</p>
+        <p>This work isn't separate from what I do professionally. It's the reason I care so much about language that doesn't abandon people—in policy disclosures, in crisis communications, in any product that touches something that matters.</p>
       </div>
-      <div class="exp-card">
-        <div class="exp-company">Facebook / Instagram</div>
-        <div class="exp-role">Content Designer</div>
-        <div class="exp-years">2020–2021</div>
-        <div class="exp-desc">Defined content strategy for Instagram's first-ever ads privacy control—shaping how sensitive policy changes got translated into user-facing narrative. Led cross-functional alignment across Instagram and Facebook on ads privacy products, partnering with legal, privacy, and policy teams throughout.</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-company">Earlier: Finance & Editorial</div>
-        <div class="exp-role">Reporter → Senior Editor → VP Lead Editor</div>
-        <div class="exp-years">2005–2020</div>
-        <div class="exp-desc">15 years spanning financial services UX, editorial strategy, and journalism. Appeared on CNN, NPR, and Fox News as a subject matter expert. Won a Sigma Delta Chi Award and Best in Business Award (Explanatory, digital). Where the love of words first met the discipline of systems.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact fade-up" id="contact">
-    <p class="section-eyebrow">Contact Me</p>
-    <h2 class="section-title">Got a content problem?<br/><em>(I've seen worse.)</em></h2>
-    <p class="contact-sub">
-      Whether you're building a voice and tone framework from scratch, untangling a messy content system,<br/>or just need someone to finally fix your empty states—I'd love to hear about it.
-    </p>
-    <div class="contact-links">
-      <a href="mailto:leslievaleriehunt@gmail.com" class="btn btn-primary">Email</a>
-      <a href="https://www.linkedin.com/in/huntleslie/" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn →</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Leslie Hunt. All rights reserved.</p>
-    <p>Designed with intention. Written with care. <a href="mailto:leslievaleriehunt@gmail.com">Say hello →</a></p>
-  </footer>
-
-  <script>
-    // Custom password gate
-    (function() {
-      const correct = 'leslie2026';
-      const key = 'lh_portfolio_auth';
-      if (sessionStorage.getItem(key) === correct) return;
-
-      document.body.style.display = 'none';
-
-      const gate = document.createElement('div');
-      gate.id = 'password-gate';
-      gate.innerHTML = `
-        <div style="
-          position:fixed;inset:0;z-index:9999;
-          background:#F5F0E8;
-          display:flex;flex-direction:column;
-          align-items:center;justify-content:center;
-          font-family:'DM Sans',sans-serif;
-        ">
-          <div style="text-align:center;max-width:360px;padding:2rem;">
-            <p style="font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:#E8651A;margin-bottom:1rem;">Leslie Hunt</p>
-            <h1 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#1A1A18;margin-bottom:0.5rem;line-height:1.2;">Portfolio</h1>
-            <p style="font-size:0.9rem;color:#6B6558;margin-bottom:2rem;">Enter the password to continue.</p>
-            <input id="pw-input" type="password" placeholder="Password" style="
-              width:100%;padding:0.85rem 1rem;
-              border:2px solid #D9D2C5;background:#FDFAF4;
-              font-family:'DM Sans',sans-serif;font-size:0.95rem;color:#1A1A18;
-              outline:none;margin-bottom:0.75rem;box-sizing:border-box;
-            " />
-            <p id="pw-error" style="color:#E8651A;font-size:0.8rem;min-height:1.2em;margin-bottom:0.75rem;"></p>
-            <button id="pw-btn" style="
-              width:100%;padding:0.85rem;
-              background:#1D4D2E;color:#FDFAF4;
-              border:none;font-family:'DM Sans',sans-serif;
-              font-size:0.85rem;font-weight:500;letter-spacing:0.05em;
-              cursor:pointer;
-            ">Enter</button>
-          </div>
+      <div class="opeds">
+        <p class="opeds-label">Published Writing</p>
+        <div class="oped-card">
+          <div class="oped-pub">The Hill · Opinion</div>
+          <div class="oped-title">The Justice Department must keep up its investigation of NYPD discarding rape cases</div>
+          <div class="oped-desc">On the DOJ's federal probe into the NYPD Special Victims Division—why the investigation matters, and what's at stake if it stalls.</div>
+          <a href="https://thehill.com/opinion/criminal-justice/5491946-justice-department-investigates-nypd/" target="_blank" rel="noopener" class="oped-link">Read the piece →</a>
         </div>
-      `;
-      document.body.parentNode.insertBefore(gate, document.body);
+        <div class="oped-card">
+          <div class="oped-pub">Substack · Newsletter</div>
+          <div class="oped-title">Fractured</div>
+          <div class="oped-desc">A newsletter on trauma, institutional failure, and what accountability actually looks like from the inside.</div>
+          <a href="https://fracturedarchive.substack.com/" target="_blank" rel="noopener" class="oped-link">Read on Substack →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      function attempt() {
-        const val = document.getElementById('pw-input').value;
-        if (val === correct) {
-          sessionStorage.setItem(key, correct);
-          gate.remove();
-          document.body.style.display = '';
-        } else {
-          document.getElementById('pw-error').textContent = 'Incorrect password. Try again.';
-          document.getElementById('pw-input').value = '';
-          document.getElementById('pw-input').focus();
-        }
-      }
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Experience</p>
+    <h2>The resume, <em>abridged.</em></h2>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">Instacart</div>
+          <div class="exp-period">2021–Present</div>
+        </div>
+        <div>
+          <div class="exp-role">Senior Content Designer II</div>
+          <div class="exp-desc">Led end-to-end content strategy for advertiser tools, customer shopping experience, and the Shopper app. Contributed to Instacart's product tone framework, built scalable communication frameworks and terminology systems, and developed AI prompt frameworks that embedded brand voice and harm-aware language constraints.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">Facebook / Instagram</div>
+          <div class="exp-period">2020–2021</div>
+        </div>
+        <div>
+          <div class="exp-role">Content Designer</div>
+          <div class="exp-desc">Defined content strategy for Instagram's first-ever ads privacy control—shaping how sensitive policy changes got translated into user-facing narrative. Led cross-functional alignment across Instagram and Facebook on ads privacy products, partnering with legal, privacy, and policy teams throughout.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">Financial Services</div>
+          <div class="exp-period">2018–2019</div>
+        </div>
+        <div>
+          <div class="exp-role">Vice President, Lead Editor</div>
+          <div class="exp-desc">Led content strategy for a major mobile app and multiple home lending products. Managed editorial standards, partnered with legal and compliance, and built process improvements for content delivery.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-company">Earlier: Finance & Editorial</div>
+          <div class="exp-period">2005–2018</div>
+        </div>
+        <div>
+          <div class="exp-role">Reporter → Senior Editor → Editorial Strategist</div>
+          <div class="exp-desc">13 years spanning financial services UX, editorial strategy, and journalism. Appeared on CNN, NPR, and Fox News as a subject matter expert. Won a Sigma Delta Chi Award and Best in Business Award (Explanatory, digital).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      document.getElementById('pw-btn').addEventListener('click', attempt);
-      document.getElementById('pw-input').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') attempt();
-      });
-    })();
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <p class="section-label">Contact</p>
+      <h2>Let's <em>talk.</em></h2>
+      <p>I'm open to new opportunities—full-time roles, collaborations, or just a good conversation about content strategy, advocacy, or what it means to write for people in high-stakes moments. Feel free to reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:leslievaleriehunt@gmail.com" class="btn btn-primary">Email me</a>
+        <a href="https://www.linkedin.com/in/huntleslie/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Fade-up on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(el => {
-        if (el.isIntersecting) {
-          el.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Leslie Hunt. All rights reserved. &nbsp;·&nbsp; Designed with intention. Written with care.</p>
+</footer>
 
 </body>
 </html>
